@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main.css">
+    <title>BookLove</title>
+</head>
+
+<body class="body">
+    <header>
+        <h1>BookLove</h1>
+        <img src="/images/Profile%20Large.png" alt="Profiel">
+        <img class="berichten" src="/images/bericht.png" alt="Logo">
+    </header>
+    <main class="main">
+
+        <section class="inloggen hidden">
+            <div class="inlogTitel">
+                <h2 class="loginH2">Inloggen</h2>
+                <a href="/aanmelden.ejs">REGISTREREN</a>
+            </div>
+            <h3>Log je in om je matches te zien!</h3>
+            <form action="./ingelogd.ejs">
+                <label for="emailInlog">e-mail adres:</label>
+                <input required id="emailInlog" type="email" placeholder="abc@email.com" class="formInput">
+                <label for="passwordInlog">wachtwoord:</label>
+                <input required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" id="passwordInlog" type="password" placeholder="wachtwoord" class="formInput">
+                <input type="submit" value="inloggen" class="formButton" id="inloggenSubmit">
+            </form>
+
+
+        </section>
+
+        <section>
+
+            <img class="kandidaad" src="/images/Profile%20Large.png" alt="geert mak">
+            <h2>Suzanne</h2>
+            <h3>match 95%</h3>
+            <ul>
+                <li><img src="/images/de%20levens%20van%20jan%20six.jpg" alt=""></li>
+                <li><img src="css/images/rijzen%20zonder%20john.jpg" alt=""></li>
+                <li><img src="css/images/verleden%20van%20nederland.jpg" alt=""></li>
+            </ul>
+
+        </section>
+        <section>
+
+            <img class="kandidaad" src="/images/Profile%20Large.png" alt="geert mak">
+            <h2>Merel</h2>
+            <h3>match 80%</h3>
+            <ul>
+                <li><img src="/images/de%20levens%20van%20jan%20six.jpg" alt=""></li>
+                <li><img src="/images/rijzen%20zonder%20john.jpg" alt=""></li>
+                <li><img src="/images/verleden%20van%20nederland.jpg" alt=""></li>
+            </ul>
+
+        </section>
+        <section>
+
+            <img class="kandidaad" src="/images/Profile%20Large.png" alt="geert mak">
+            <h2>Marlies</h2>
+            <h3>match 75%</h3>
+            <ul>
+                <li><img src="/images/de%20levens%20van%20jan%20six.jpg" alt=""></li>
+                <li><img src="/images/rijzen%20zonder%20john.jpg" alt=""></li>
+                <li><img src="/images/verleden%20van%20nederland.jpg" alt=""></li>
+            </ul>
+
+        </section>
+    </main>
+    <script src="/java.js"></script>
+</body>

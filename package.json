@@ -1,0 +1,23 @@
+{
+  "name": "projecttech",
+  "version": "1.0.0",
+  "description": "Project tech",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JimvandeVen/projecttech.git"
+  },
+  "author": "Jim van de Ven",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JimvandeVen/projecttech/issues"
+  },
+  "homepage": "https://github.com/JimvandeVen/projecttech#readme",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.3"
+  }
+}

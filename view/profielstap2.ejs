@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main.css">
+    <title>BookLove</title>
+</head>
+
+<body>
+    <header>
+        <a href="./ingelogd.ejs">
+            <h1>BookLove</h1>
+        </a>
+        <a href="./eigenprofiel.ejs"><img src="/images/Profile%20Large.png" alt="Profiel"></a>
+        <a href="./berichten.ejs"><img class="berichten" src="/images/bericht.png" alt="Logo"></a>
+    </header>
+    <main>
+        <section class="inloggen hidden boekToevoegenSection">
+            <h2>Voeg je boek toe</h2>
+            <form action="./ingelogd.ejs">
+                <label for="titel">Titel</label>
+                <input required id="titel" placeholder="In Europa" class="formInput">
+                <label for="auteur">Auteur</label>
+                <input required id="auteur" placeholder="Geert Mak" class="formInput">
+                <label for="isbn">ISBN (Optioneel)</label>
+                <input id="isbn" placeholder="9872987547" class="formInput">
+                <input type="submit" value="toevoegen" class="boekToevoegenSubmit" id="inloggenSubmit">
+            </form>
+
+        </section>
+        <section class="aanmelden aanmeldenStap1">
+            <h2 class="loginH2">Stap 2/2</h2>
+            <p>Geef je favoriete, meest interessante of net gelezen boeken aan en help ons jouw BookLove zoeken.</p>
+
+            <ul>
+                <li><img src="/images/de%20levens%20van%20jan%20six.jpg" alt=""></li>
+                <li><img src="/images/rijzen%20zonder%20john.jpg" alt=""></li>
+                <li class="boekToevoegen"><img src="/images/add@2x.png" alt=""></li>
+            </ul>
+            <form action="./ingelogd.ejs">
+                <input type="submit" value="VOLGENDE STAP" class="formButton" id="stap2Submit">
+            </form>
+
+
+
+
+        </section>
+
+
+
+    </main>
+    <script src="js/javaprofielstap2.js"></script>
+</body>
