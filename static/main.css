@@ -6,6 +6,10 @@ body {
     margin: 0;
 }
 
+.chat {
+    float: right;
+}
+
 ::-webkit-scrollbar {
     width: 0;
     background: transparent;

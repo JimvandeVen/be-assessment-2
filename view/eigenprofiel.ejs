@@ -10,13 +10,25 @@
 
 <body>
     <header>
-        <a href="/ingelogd.ejs">
+        <a href="/ingelogd">
             <h1>BookLove</h1>
         </a>
-        <a href="/eigenprofiel.ejs"><img src="/images/Profile%20Large.png" alt="Profiel"></a>
-        <a href="/berichten.ejs"><img class="berichten" src="/images/bericht.png" alt="Logo"></a>
+        <a href="/eigenprofiel"><img src="/images/Profile%20Large.png" alt="Profiel"></a>
+        <a href="/berichten"><img class="berichten" src="/images/bericht.png" alt="Logo"></a>
     </header>
     <main>
+        <section class="inloggen hidden boekToevoegenSection">
+            <h2>Voeg je boek toe</h2>
+            <form action="./eigenprofiel">
+                <label for="titel">Titel</label>
+                <input required id="titel" placeholder="In Europa" class="formInput">
+                <label for="auteur">Auteur</label>
+                <input required id="auteur" placeholder="Geert Mak" class="formInput">
+                <label for="isbn">ISBN (Optioneel)</label>
+                <input id="isbn" placeholder="9872987547" class="formInput">
+                <input type="submit" value="toevoegen" class="boekToevoegenSubmit" id="inloggenSubmit">
+            </form>
+        </section>
         <section class="eigenProfielSection">
 
             <img class="kandidaad" src="/images/Profile%20Large.png" alt="geert mak">
@@ -28,10 +40,6 @@
             <p>Amsterdam</p>
             <h4>Geboortedatum:</h4>
             <p>15-07-1990</p>
-            <h4>Opleidingsniveau:</h4>
-            <p>Wetenschappelijk onderwijs</p>
-            <h4>Beroep:</h4>
-            <p>Docent hogeschool</p>
             <h4>Jouw bibliotheek:</h4>
             <ul>
                 <li><img src="/images/de%20levens%20van%20jan%20six.jpg" alt=""></li>
@@ -39,12 +47,9 @@
                 <li><img src="/images/verleden%20van%20nederland.jpg" alt=""></li>
                 <li><img src="/images/de%20levens%20van%20jan%20six.jpg" alt=""></li>
                 <li><img src="/images/rijzen%20zonder%20john.jpg" alt=""></li>
-                <li><img src="/images/add@2x.png" alt=""></li>
-
-
+                <li><img class="boekToevoegen" src="/images/add@2x.png" alt="" ></li>
             </ul>
-
         </section>
-
     </main>
+    <script src="/javaprofielstap2.js"></script>
 </body>
