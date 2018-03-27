@@ -22,11 +22,11 @@
                 <a href="/aanmelden">REGISTREREN</a>
             </div>
             <h3>Log je in om je matches te zien!</h3>
-            <form action="./ingelogd">
+            <form action="/log-in" method="post">
                 <label for="emailInlog">e-mail adres:</label>
-                <input required id="emailInlog" type="email" placeholder="abc@email.com" class="formInput">
+                <input required name="email" id="emailInlog" type="email" placeholder="abc@email.com" class="formInput">
                 <label for="passwordInlog">wachtwoord:</label>
-                <input required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" id="passwordInlog" type="password" placeholder="wachtwoord" class="formInput">
+                <input required name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" id="passwordInlog" type="password" placeholder="wachtwoord" class="formInput">
                 <input type="submit" value="inloggen" class="formButton" id="inloggenSubmit">
             </form>
 
