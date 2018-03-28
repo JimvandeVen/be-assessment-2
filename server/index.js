@@ -46,6 +46,7 @@ app.get('/log-out', logout)
 
 app.post('/profielPost', aanmelden)
 app.post('/log-in', login)
+app.post('/boekToevoegen', boekToevoegen)
 
 console.log('Server is Listening')
 
@@ -110,29 +111,32 @@ function profielStap2(req, res) {
 
 function ingelogd(req, res) {
     var email = req.session.user.email
-    
+
     if (req.session.user) {
         connection.query('SELECT partnerGeslacht FROM gebruikers WHERE email = ?', email, done)
-        
-        function done(err, data){
+
+        function done(err, data) {
             console.log(data)
             if (err) {
-            console.error(err)
+                console.error(err)
             } else {
                 var gebruikerGeslacht = data[0].partnerGeslacht
                 console.log(data)
                 connection.query('SELECT * FROM gebruikers WHERE gebruikerGeslacht = ?', gebruikerGeslacht, done)
-                function done(err, data){
+
+                function done(err, data) {
                     console.log(data)
-                    if (err){
+                    if (err) {
                         console.error(err)
                     } else {
-                        res.render('ingelogd.ejs', {data: data})
+                        res.render('ingelogd.ejs', {
+                            data: data
+                        })
                     }
                 }
             }
         }
-        
+
     } else {
         res.status(401).send('Credentials required')
     }
@@ -140,13 +144,15 @@ function ingelogd(req, res) {
 
 function eigenProfiel(req, res) {
     var email = req.session.user.email
-    
+
     if (req.session.user) {
 
         connection.query('SELECT * FROM gebruikers WHERE email = ?', email, done)
 
         function done(err, data) {
-            res.render('eigenprofiel.ejs', {data: data[0]})
+            res.render('eigenprofiel.ejs', {
+                data: data[0]
+            })
         }
     } else {
         res.status(401).send('Credentials required')
@@ -188,6 +194,39 @@ function berichtendetail(req, res) {
         res.status(401).send('Credentials required')
     }
 }
+
+//connection.query('UPDATE gebruikers SET gelezenBoeken WHERE email = ? VALUE = ?', email, ISBN, done)
+
+
+function boekToevoegen(req, res) {
+    var titel = req.body.titel
+    var auteur = req.body.auteur
+    var ISBN = req.body.ISBN
+    var email = req.session.user.email
+    console.log(email)
+    console.log(ISBN)
+
+    connection.query('SELECT * FROM boeken WHERE ISBN = ?', ISBN, done)
+
+    function done(err, data) {
+        console.log(data)
+        if (err) {
+            console.error(err)
+        } else {
+            connection.query('UPDATE gebruikers SET gelezenBoeken = ? WHERE email = ?', [ISBN, email], done)
+
+            function done(err, data) {
+                console.log(data)
+                if (err) {
+                    console.error(err)
+                } else {
+                    eigenProfiel(req, res)
+                }
+            }
+        }
+    }
+}
+
 
 function aanmelden(req, res, next) {
     var email = req.body.email

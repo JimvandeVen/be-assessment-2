@@ -4,14 +4,10 @@
 
 var boekToevoegenSection = document.querySelector(".boekToevoegenSection");
 var boekToevoegen = document.querySelector(".boekToevoegen");
-var boekToevoegenSubmit= document.querySelector(".boekToevoegenSubmit");
+var boekToevoegenSluit= document.querySelector(".boekToevoegenSubmit");
 
 function openToevoegen() {
     boekToevoegenSection.classList.remove("hidden");
-}
-
-function closeToevoegen() {
-    boekToevoegenSection.classList.add("hidden");
 }
 
 boekToevoegen.addEventListener("click", openToevoegen);

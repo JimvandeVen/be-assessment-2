@@ -21,13 +21,13 @@
     <main>
         <section class="inloggen hidden boekToevoegenSection">
             <h2>Voeg je boek toe</h2>
-            <form action="./eigenprofiel">
+            <form action="/boekToevoegen" method="post">
                 <label for="titel">Titel</label>
-                <input required id="titel" placeholder="In Europa" class="formInput">
+                <input required name="titel" id="titel" placeholder="In Europa" class="formInput">
                 <label for="auteur">Auteur</label>
-                <input required id="auteur" placeholder="Geert Mak" class="formInput">
+                <input required name="auteur" id="auteur" placeholder="Geert Mak" class="formInput">
                 <label for="isbn">ISBN (Optioneel)</label>
-                <input id="isbn" placeholder="9872987547" class="formInput">
+                <input id="isbn" name="ISBN" placeholder="9872987547" class="formInput">
                 <input type="submit" value="toevoegen" class="boekToevoegenSubmit" id="inloggenSubmit">
             </form>
         </section>
