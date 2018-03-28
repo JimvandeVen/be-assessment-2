@@ -3,11 +3,14 @@
 require('dotenv').config()
 
 var express = require('express')
+//var fetch = require('node-fetch')
 var app = express()
 var argon2 = require('argon2')
 var bodyParser = require('body-parser')
 var mysql = require('mysql')
 var session = require('express-session')
+
+
 
 var connection = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -39,6 +42,7 @@ app.get('/eigenprofiel', eigenProfiel)
 app.get('/kandidaadprofiel', kandidaadProfiel)
 app.get('/berichten', berichten)
 app.get('/berichtendetail', berichten)
+app.get('/log-out', logout)
 
 app.post('/profielPost', aanmelden)
 app.post('/log-in', login)
@@ -46,7 +50,36 @@ app.post('/log-in', login)
 console.log('Server is Listening')
 
 
-
+//connection.query('SELECT * FROM boeken', done)
+//
+//function done (err, data) {
+//    if (err) {
+//        console.error(err)
+//    } else if (data.length == 0){
+//        console.log('hoi')
+//        fetch('https://www.googleapis.com/books/v1/volumes')
+//            .then(function (res) {
+//                return res.json()
+//            })
+//            .then (function (boekenLijst) {
+//                return boekenLijst.map(function(boek) {
+//                    return {
+//                        ISBN: boek.isbn,
+//                        naam: boek.name,
+//                        beschrijving: boek.description
+//                    }
+//                })
+//            })
+//            .then (function (verwerkteBoeken) { 
+//                connection.query('INSERT INTO boeken VALUES ?', verwerkteBoeken, done)
+//                function done (err) {
+//                    if (err) {
+//                        console.error(err)
+//                    }
+//                }
+//            })
+//    }
+//}
 
 function index(req, res) {
     var result = {
@@ -54,7 +87,6 @@ function index(req, res) {
         data: undefined
     }
     res.render('index.ejs', Object.assign({}, result))
-
 }
 
 function aanmeldenForm(req, res) {
@@ -77,24 +109,45 @@ function profielStap2(req, res) {
 }
 
 function ingelogd(req, res) {
-    var result = {
-        errors: [],
-        data: undefined
-    }
+    var email = req.session.user.email
+    
     if (req.session.user) {
-        res.render('ingelogd.ejs', Object.assign({}, result))
+        connection.query('SELECT partnerGeslacht FROM gebruikers WHERE email = ?', email, done)
+        
+        function done(err, data){
+            console.log(data)
+            if (err) {
+            console.error(err)
+            } else {
+                var gebruikerGeslacht = data[0].partnerGeslacht
+                console.log(data)
+                connection.query('SELECT * FROM gebruikers WHERE gebruikerGeslacht = ?', gebruikerGeslacht, done)
+                function done(err, data){
+                    console.log(data)
+                    if (err){
+                        console.error(err)
+                    } else {
+                        res.render('ingelogd.ejs', {data: data})
+                    }
+                }
+            }
+        }
+        
     } else {
         res.status(401).send('Credentials required')
     }
 }
 
 function eigenProfiel(req, res) {
-    var result = {
-        errors: [],
-        data: undefined
-    }
+    var email = req.session.user.email
+    
     if (req.session.user) {
-        res.render('eigenprofiel.ejs', Object.assign({}, result))
+
+        connection.query('SELECT * FROM gebruikers WHERE email = ?', email, done)
+
+        function done(err, data) {
+            res.render('eigenprofiel.ejs', {data: data[0]})
+        }
     } else {
         res.status(401).send('Credentials required')
     }
@@ -254,4 +307,14 @@ function login(req, res, next) {
             }
         }
     }
+}
+
+function logout(req, res, next) {
+    req.session.destroy(function (err) {
+        if (err) {
+            next(err)
+        } else {
+            res.redirect('/')
+        }
+    })
 }

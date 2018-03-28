@@ -15,6 +15,8 @@
         </a>
         <a href="/eigenprofiel"><img src="/images/Profile%20Large.png" alt="Profiel"></a>
         <a href="/berichten"><img class="berichten" src="/images/bericht.png" alt="Logo"></a>
+        <a href=/log-out>Log out</a>
+
     </header>
     <main>
         <section class="inloggen hidden boekToevoegenSection">
@@ -32,14 +34,12 @@
         <section class="eigenProfielSection">
 
             <img class="kandidaad" src="/images/Profile%20Large.png" alt="geert mak">
-            <h2>Loc</h2>
+            <h2><%= data.naam %></h2>
             <img class="editButton" src="/images/edit@2x.png" alt="edit">
-            <h3>Beschrijving:</h3>
-            <p>Ik ben een fervent lezer en houd vooral van historische romans.</p>
             <h4>Woonplaats:</h4>
-            <p>Amsterdam</p>
+            <p><%= data.woonplaats %></p>
             <h4>Geboortedatum:</h4>
-            <p>15-07-1990</p>
+            <p><%= data.geboortedatum %></p>
             <h4>Jouw bibliotheek:</h4>
             <ul>
                 <li><img src="/images/de%20levens%20van%20jan%20six.jpg" alt=""></li>

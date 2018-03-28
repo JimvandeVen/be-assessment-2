@@ -13,49 +13,25 @@
         <h1>BookLove</h1>
         <a href="./eigenprofiel"><img src="/images/Profile%20Large.png" alt="Profiel"></a>
         <a href="./berichten"><img class="berichten" src="/images/bericht.png" alt="Logo"></a>
+        <a href=/log-out>Log out</a>
+
     </header>
     <main>
+        <% data.forEach(function (entity) { %>
+            <section>
 
+                <a href="./kandidaadprofiel"><img class="kandidaad" src="/images/Profile%20Large.png" alt="geert mak"></a>
+                <img class="chat" src="/images/chatLeeg.png" alt="chat">
+                <h2><%= entity.naam %></h2>
+                <h3>match 95%</h3>
+                <ul>
+                    <li><img src="/images/de%20levens%20van%20jan%20six.jpg" alt=""></li>
+                    <li><img src="/images/rijzen%20zonder%20john.jpg" alt=""></li>
+                    <li><img src="/images/verleden%20van%20nederland.jpg" alt=""></li>
+                </ul>
 
-        <section>
-
-            <a href="./kandidaadprofiel"><img class="kandidaad" src="/images/Profile%20Large.png" alt="geert mak"></a>
-            <img class="chat" src="/images/chatLeeg.png" alt="chat">
-            <h2>Suzanne</h2>
-            <h3>match 95%</h3>
-            <ul>
-                <li><img src="/images/de%20levens%20van%20jan%20six.jpg" alt=""></li>
-                <li><img src="/images/rijzen%20zonder%20john.jpg" alt=""></li>
-                <li><img src="/images/verleden%20van%20nederland.jpg" alt=""></li>
-            </ul>
-
-        </section>
-        <section>
-
-            <a href="./kandidaadprofiel"><img class="kandidaad" src="/images/Profile%20Large.png" alt="geert mak"></a>
-            <img class="chat" src="/images/chatLeeg.png" alt="chat">
-            <h2>Merel</h2>
-            <h3>match 80%</h3>
-            <ul>
-                <li><img src="/images/de%20levens%20van%20jan%20six.jpg" alt=""></li>
-                <li><img src="/images/rijzen%20zonder%20john.jpg" alt=""></li>
-                <li><img src="/images/verleden%20van%20nederland.jpg" alt=""></li>
-            </ul>
-
-        </section>
-        <section>
-
-            <a href="./kandidaadprofiel"><img class="kandidaad" src="/images/Profile%20Large.png" alt="geert mak"></a>
-            <img class="chat" src="/images/chatLeeg.png" alt="chat">
-            <h2>Marlies</h2>
-            <h3>match 75%</h3>
-            <ul>
-                <li><img src="/images/de%20levens%20van%20jan%20six.jpg" alt=""></li>
-                <li><img src="/images/rijzen%20zonder%20john.jpg" alt=""></li>
-                <li><img src="/images/verleden%20van%20nederland.jpg" alt=""></li>
-            </ul>
-
-        </section>
-    </main>
+            </section>
+            <% }) %>
+        </main>
     
 </body>
