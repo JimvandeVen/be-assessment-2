@@ -51,37 +51,6 @@ app.post('/boekToevoegen', boekToevoegen)
 console.log('Server is Listening')
 
 
-//connection.query('SELECT * FROM boeken', done)
-//
-//function done (err, data) {
-//    if (err) {
-//        console.error(err)
-//    } else if (data.length == 0){
-//        console.log('hoi')
-//        fetch('https://www.googleapis.com/books/v1/volumes')
-//            .then(function (res) {
-//                return res.json()
-//            })
-//            .then (function (boekenLijst) {
-//                return boekenLijst.map(function(boek) {
-//                    return {
-//                        ISBN: boek.isbn,
-//                        naam: boek.name,
-//                        beschrijving: boek.description
-//                    }
-//                })
-//            })
-//            .then (function (verwerkteBoeken) { 
-//                connection.query('INSERT INTO boeken VALUES ?', verwerkteBoeken, done)
-//                function done (err) {
-//                    if (err) {
-//                        console.error(err)
-//                    }
-//                }
-//            })
-//    }
-//}
-
 function index(req, res) {
     var result = {
         errors: [],
@@ -206,14 +175,56 @@ function boekToevoegen(req, res) {
     console.log(email)
     console.log(ISBN)
 
-    connection.query('SELECT * FROM boeken WHERE ISBN = ?', ISBN, done)
 
-    function done(err, data) {
-        console.log(data)
-        if (err) {
-            console.error(err)
-        } else {
-            connection.query('UPDATE gebruikers SET gelezenBoeken = ? WHERE email = ?', [ISBN, email], done)
+    //    var promise1 = new Promise(function (resolve, reject) {
+    //        resolve('Success!');
+    //    });
+    //
+    //    promise1.then(function (value) {
+    //        console.log(value);
+    //        // expected output: "Success!"
+    //    });
+    //
+    //    router.post('/Registration', function (req, res) {
+    //        return User
+    //            .findOne({
+    //                username: req.body.username
+    //            })
+    //            .then((user) => {
+    //                if (user) {
+    //                    return console.log({
+    //                        msg: "Username already been taken"
+    //                    });
+    //                }
+    //                return console.log({
+    //                    msg: "Username available."
+    //                });
+    //            })
+    //            .catch((err) => {
+    //                return console.error(err);
+    //            });
+    //    });
+
+    var boekToevoegenPromise = new Promise(function (resolve, reject) {
+            connection.query('SELECT * FROM boeken WHERE ISBN = ?', ISBN, done)
+
+            function done(err, data) {
+                console.log(data)
+                if (err) {
+                    console.error(err)
+                } else if (data.length == 0) {
+                    console.log('this book does not exist')
+                    reject(
+                        res
+                        .status(401)
+                        .send('Dit boek bestaat niet. Ga terug en voeg het juiste boek toe.'))
+                } else {
+                    resolve(data)
+                }
+            }
+        })
+        .then(function (data) {
+            connection.query('INSERT INTO gelezenBoekenTabel SET email = ?, ISBN =?', [email, ISBN], done)
 
             function done(err, data) {
                 console.log(data)
@@ -223,8 +234,11 @@ function boekToevoegen(req, res) {
                     eigenProfiel(req, res)
                 }
             }
-        }
-    }
+        })
+        .catch(function (reject) {
+            console.error(reject)
+
+        })
 }
 
 
