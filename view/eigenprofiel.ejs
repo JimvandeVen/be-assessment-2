@@ -34,19 +34,18 @@
         <section class="eigenProfielSection">
 
             <img class="kandidaad" src="/images/Profile%20Large.png" alt="geert mak">
-            <h2><%= data.naam %></h2>
+            <h2><%= data[0].naam %></h2>
             <img class="editButton" src="/images/edit@2x.png" alt="edit">
             <h4>Woonplaats:</h4>
-            <p><%= data.woonplaats %></p>
+            <p><%= data[0].woonplaats %></p>
             <h4>Geboortedatum:</h4>
             <p><%= data.geboortedatum %></p>
             <h4>Jouw bibliotheek:</h4>
             <ul>
-                <li><img src="/images/de%20levens%20van%20jan%20six.jpg" alt=""></li>
-                <li><img src="/images/rijzen%20zonder%20john.jpg" alt=""></li>
-                <li><img src="/images/verleden%20van%20nederland.jpg" alt=""></li>
-                <li><img src="/images/de%20levens%20van%20jan%20six.jpg" alt=""></li>
-                <li><img src="/images/rijzen%20zonder%20john.jpg" alt=""></li>
+               
+               <% data.forEach(function (entity) { %>
+                <li><%= entity.ISBN %></li>
+                 <% }) %>
                 <li><img class="boekToevoegen" src="/images/add@2x.png" alt="" ></li>
             </ul>
         </section>

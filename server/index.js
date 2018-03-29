@@ -115,18 +115,33 @@ function eigenProfiel(req, res) {
     var email = req.session.user.email
 
     if (req.session.user) {
-
-        connection.query('SELECT * FROM gebruikers WHERE email = ?', email, done)
-
+        connection.query('SELECT * FROM gebruikers LEFT JOIN gelezenBoekenTabel ON gebruikers.email = gelezenBoekenTabel.email WHERE gebruikers.email = ?', email, done)
         function done(err, data) {
+            console.log(data)
             res.render('eigenprofiel.ejs', {
-                data: data[0]
+                data: data
             })
-        }
+            }
+
     } else {
         res.status(401).send('Credentials required')
     }
 }
+
+
+//connection.query('SELECT * FROM gebruikers LEFT JOIN gelezenBoekenTabel ON gebruikers.gelezenBoeken = gelezenBoekenTabel.ISBN WHERE gebruikers.email = ?', email, done)
+
+//connection.query('SELECT * FROM gebruikers WHERE email = ?', email, done)
+//
+//        function done(err, data) {
+//            res.render('eigenprofiel.ejs', {
+//                data: data[0]
+//            })
+//        }
+//    } else {
+//        res.status(401).send('Credentials required')
+//    }
+
 
 function kandidaadProfiel(req, res) {
     var result = {
@@ -211,7 +226,7 @@ function boekToevoegen(req, res) {
             function done(err, data) {
                 console.log(data)
                 if (err) {
-                    console.error(err)
+                    reject(err)
                 } else if (data.length == 0) {
                     console.log('this book does not exist')
                     reject(
