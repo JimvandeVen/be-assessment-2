@@ -43,10 +43,13 @@ app.get('/kandidaadprofiel', kandidaadProfiel)
 app.get('/berichten', berichten)
 app.get('/berichtendetail', berichten)
 app.get('/log-out', logout)
+app.get('/aanpassenForm', aanpassenForm)
+
 
 app.post('/profielPost', aanmelden)
 app.post('/log-in', login)
 app.post('/boekToevoegen', boekToevoegen)
+app.post('/aanpassen', profielAanpassen)
 
 console.log('Server is Listening')
 
@@ -116,18 +119,52 @@ function eigenProfiel(req, res) {
 
     if (req.session.user) {
         connection.query('SELECT * FROM gebruikers LEFT JOIN gelezenBoekenTabel ON gebruikers.email = gelezenBoekenTabel.email WHERE gebruikers.email = ?', email, done)
+
         function done(err, data) {
             console.log(data)
             res.render('eigenprofiel.ejs', {
                 data: data
             })
-            }
+        }
 
     } else {
         res.status(401).send('Credentials required')
     }
 }
 
+function aanpassenForm(req, res) {
+    var result = {
+        errors: [],
+        data: undefined
+    }
+    res.render('aanpassen.ejs', Object.assign({}, result))
+}
+
+function profielAanpassen(req, res) {
+    var email = req.session.user.email
+    var naam = req.body.naam
+    var gebruikerGeslacht = req.body.gebruikerGeslacht
+    var partnerGeslacht = req.body.partnerGeslacht
+    var woonplaats = req.body.woonplaats
+    var geboortedatum = req.body.geboortedatum
+    
+    connection.query('UPDATE gebruikers SET ? WHERE email = ?', [{
+            naam: naam,
+            gebruikerGeslacht: gebruikerGeslacht,
+            partnerGeslacht: partnerGeslacht,
+            woonplaats: woonplaats,
+            geboortedatum: geboortedatum
+        }, email] , done)
+    
+    function done(err, data) {
+                console.log(data)
+                if (err) {
+                    console.error(err)
+                } else {
+                    eigenProfiel(req, res)
+                }
+            }
+}
 
 //connection.query('SELECT * FROM gebruikers LEFT JOIN gelezenBoekenTabel ON gebruikers.gelezenBoeken = gelezenBoekenTabel.ISBN WHERE gebruikers.email = ?', email, done)
 
