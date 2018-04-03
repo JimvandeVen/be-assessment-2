@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main.css">
+    <title>BookLove</title>
+</head>
+
+<body>
+    <header>
+        <h1>BookLove</h1>
+        <a href="./eigenprofiel"><img src="/images/Profile%20Large.png" alt="Profiel"></a>
+        <a href="./berichten"><img class="berichten" src="/images/bericht.png" alt="Logo"></a>
+        <a href=/log-out>Log out</a>
+
+    </header>
+    <main>
+       <section class="inloggen nietIngelogd">
+            <h2>Je bent niet ingelogd, log in of maak een profiel aan.</h2>
+            <div class="inlogTitel">
+                <h3 class="loginH2">Inloggen</h3>
+                <a href="/aanmelden"><h3>Registreren</h3></a>
+            </div>
+           <form action="/log-in" method="post">
+                <label for="emailInlog">e-mail adres:</label>
+                <input required name="email" id="emailInlog" type="email" placeholder="abc@email.com" class="formInput">
+                <label for="passwordInlog">wachtwoord:</label>
+                <input required name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" id="passwordInlog" type="password" placeholder="wachtwoord" class="formInput">
+                <input type="submit" value="inloggen" class="formButton" id="inloggenSubmit">
+            </form>
+
+
+        </section>
+       
+        
+    </main>
+
+</body>

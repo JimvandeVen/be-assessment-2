@@ -51,6 +51,8 @@ app.post('/log-in', login)
 app.post('/boekToevoegen', boekToevoegen)
 app.post('/aanpassen', profielAanpassen)
 
+app.delete('/:ISBN', boekVerwijderen)
+
 console.log('Server is Listening')
 
 
@@ -82,9 +84,10 @@ function profielStap2(req, res) {
 }
 
 function ingelogd(req, res) {
-    var email = req.session.user.email
 
     if (req.session.user) {
+        var email = req.session.user.email
+
         connection.query('SELECT partnerGeslacht FROM gebruikers WHERE email = ?', email, done)
 
         function done(err, data) {
@@ -110,14 +113,15 @@ function ingelogd(req, res) {
         }
 
     } else {
-        res.status(401).send('Credentials required')
+        res.status(401).render('nietIngelogd.ejs')
     }
 }
 
 function eigenProfiel(req, res) {
-    var email = req.session.user.email
+
 
     if (req.session.user) {
+        var email = req.session.user.email
         connection.query('SELECT * FROM gebruikers LEFT JOIN gelezenBoekenTabel ON gebruikers.email = gelezenBoekenTabel.email WHERE gebruikers.email = ?', email, done)
 
         function done(err, data) {
@@ -128,7 +132,7 @@ function eigenProfiel(req, res) {
         }
 
     } else {
-        res.status(401).send('Credentials required')
+        res.status(401).render('nietIngelogd.ejs')
     }
 }
 
@@ -147,38 +151,24 @@ function profielAanpassen(req, res) {
     var partnerGeslacht = req.body.partnerGeslacht
     var woonplaats = req.body.woonplaats
     var geboortedatum = req.body.geboortedatum
-    
+
     connection.query('UPDATE gebruikers SET ? WHERE email = ?', [{
-            naam: naam,
-            gebruikerGeslacht: gebruikerGeslacht,
-            partnerGeslacht: partnerGeslacht,
-            woonplaats: woonplaats,
-            geboortedatum: geboortedatum
-        }, email] , done)
-    
+        naam: naam,
+        gebruikerGeslacht: gebruikerGeslacht,
+        partnerGeslacht: partnerGeslacht,
+        woonplaats: woonplaats,
+        geboortedatum: geboortedatum
+        }, email], done)
+
     function done(err, data) {
-                console.log(data)
-                if (err) {
-                    console.error(err)
-                } else {
-                    eigenProfiel(req, res)
-                }
-            }
+        console.log(data)
+        if (err) {
+            console.error(err)
+        } else {
+            eigenProfiel(req, res)
+        }
+    }
 }
-
-//connection.query('SELECT * FROM gebruikers LEFT JOIN gelezenBoekenTabel ON gebruikers.gelezenBoeken = gelezenBoekenTabel.ISBN WHERE gebruikers.email = ?', email, done)
-
-//connection.query('SELECT * FROM gebruikers WHERE email = ?', email, done)
-//
-//        function done(err, data) {
-//            res.render('eigenprofiel.ejs', {
-//                data: data[0]
-//            })
-//        }
-//    } else {
-//        res.status(401).send('Credentials required')
-//    }
-
 
 function kandidaadProfiel(req, res) {
     var result = {
@@ -188,7 +178,7 @@ function kandidaadProfiel(req, res) {
     if (req.session.user) {
         res.render('kandidaadprofiel.ejs', Object.assign({}, result))
     } else {
-        res.status(401).send('Credentials required')
+        res.status(401).render('nietIngelogd.ejs')
     }
 }
 
@@ -200,7 +190,7 @@ function berichten(req, res) {
     if (req.session.user) {
         res.render('berichten.ejs', Object.assign({}, result))
     } else {
-        res.status(401).send('Credentials required')
+        res.status(401).render('nietIngelogd.ejs')
     }
 }
 
@@ -212,12 +202,9 @@ function berichtendetail(req, res) {
     if (req.session.user) {
         res.render('berichtendetail.ejs', Object.assign({}, result))
     } else {
-        res.status(401).send('Credentials required')
+        res.status(401).render('nietIngelogd.ejs')
     }
 }
-
-//connection.query('UPDATE gebruikers SET gelezenBoeken WHERE email = ? VALUE = ?', email, ISBN, done)
-
 
 function boekToevoegen(req, res) {
     var titel = req.body.titel
@@ -226,36 +213,6 @@ function boekToevoegen(req, res) {
     var email = req.session.user.email
     console.log(email)
     console.log(ISBN)
-
-
-    //    var promise1 = new Promise(function (resolve, reject) {
-    //        resolve('Success!');
-    //    });
-    //
-    //    promise1.then(function (value) {
-    //        console.log(value);
-    //        // expected output: "Success!"
-    //    });
-    //
-    //    router.post('/Registration', function (req, res) {
-    //        return User
-    //            .findOne({
-    //                username: req.body.username
-    //            })
-    //            .then((user) => {
-    //                if (user) {
-    //                    return console.log({
-    //                        msg: "Username already been taken"
-    //                    });
-    //                }
-    //                return console.log({
-    //                    msg: "Username available."
-    //                });
-    //            })
-    //            .catch((err) => {
-    //                return console.error(err);
-    //            });
-    //    });
 
     var boekToevoegenPromise = new Promise(function (resolve, reject) {
             connection.query('SELECT * FROM boeken WHERE ISBN = ?', ISBN, done)
@@ -292,6 +249,22 @@ function boekToevoegen(req, res) {
 
         })
 }
+
+function boekVerwijderen(req, res) {
+    var ISBN = req.params.ISBN
+    connection.query('DELETE FROM gelezenBoekenTabel WHERE ISBN = ?', ISBN, done)
+
+    function done(err) {
+        if (err) {
+            console.error(err)
+        } else {
+            res.json({
+                staus: 'ok'
+            })
+        }
+    }
+}
+
 
 
 function aanmelden(req, res, next) {

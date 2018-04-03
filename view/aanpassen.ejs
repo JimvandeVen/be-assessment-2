@@ -17,13 +17,17 @@
         <a href="/berichten"><img class="berichten" src="/images/bericht.png" alt="Logo"></a>
     </header>
     <main>
-        <section class="aanmelden">
+        <section class="aanpassen">
             <h2 class="loginH2">Pas hier je gegevens aan</h2>
                         
             <form action="/aanpassen" method="post">
 
                 <label for="naam">Voornaam:</label>
                 <input required name="naam" id="naam" type="text">
+                <label for="woonplaats">Woonplaats:</label>
+                <input required name="woonplaats" type="text">
+                <label for="geboortedatum">geboortedatum:</label>
+                <input required name="geboortedatum" type="date">
                 <p>Jij bent:</p>
                 <input required name="gebruikerGeslacht" id="isVrouw" value="vrouw" type="radio">
                 <label for="isVrouw">Vrouw</label>
@@ -34,10 +38,7 @@
                 <label for="zoektVrouw">Vrouw</label>
                 <input required name="partnerGeslacht" id="zoektMan" value="man" type="radio">
                 <label for="zoektMan">Man</label>
-                <label for="woonplaats">Woonplaats:</label>
-                <input required name="woonplaats" type="text">
-                <label for="geboortedatum">geboortedatum:</label>
-                <input required name="geboortedatum" type="date">
+                
                 
                 <input type="submit" value="aanmelden" class="formButton" id="inloggenSubmit">
             

@@ -32,6 +32,10 @@
                 <input name="passwordVerify" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" id="passwordInlogVerifieren" type="password" placeholder="wachtwoord" class="formInput">
                 <label for="naam">Voornaam:</label>
                 <input name="naam" required id="naam" type="text">
+                <label for="woonplaats">Woonplaats:</label>
+                <input required name="woonplaats" type="text">
+                <label for="geboortedatum">geboortedatum:</label>
+                <input required name="geboortedatum" type="date">
                 <p>Jij bent:</p>
                 <input name="gebruikerGeslacht" id="isVrouw" value="vrouw" type="radio">
                 <label for="isVrouw">Vrouw</label>
@@ -42,10 +46,7 @@
                 <label for="zoektVrouw">Vrouw</label>
                 <input name="partnerGeslacht" id="zoektMan" value="man" type="radio">
                 <label for="zoektMan">Man</label>
-                <label for="woonplaats">Woonplaats:</label>
-                <input required name="woonplaats" type="text">
-                <label for="geboortedatum">geboortedatum:</label>
-                <input required name="geboortedatum" type="date">
+                
                 
                 <input type="submit" value="aanmelden" class="formButton" id="inloggenSubmit">
             

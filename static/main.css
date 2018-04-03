@@ -78,15 +78,30 @@ section ul {
     list-style: none;
     display: flex;
     justify-content: space-around;
+    align-items: stretch;
     padding: 0;
     flex-wrap: wrap;
 }
 
-section li {}
+.verwijderen {
+    width: 1em;
+    height: 1em;
+}
 
+section li {
+    max-width: 4em;
+    max-height: 6em;
+    overflow: hidden;
+    margin-bottom: 1em;
+}
+
+.boekToevoegen {
+    align-self: center;
+   }
 
 section ul img {
-    width: 4em;
+    width: auto;
+    height: 100%;
 
 }
 
@@ -106,14 +121,32 @@ section ul img {
 
 }
 
+.formButton {
+    display: block;
+    margin-top: 1em;
+}
+
 .hidden {
     display: none;
 }
 
 .inloggen label,
 .aanmelden label {
-    display: block
+    display: block;
 }
+
+.aanmelden label:nth-of-type(n+7) {
+    display: inline;
+}
+
+.aanpassen label {
+    display: block;
+}
+
+.aanpassen label:nth-of-type(n+4) {
+    display: inline;
+}
+
 
 .inloggen input[type='submit'],
 .aanmelden input[type='submit'] {
@@ -255,4 +288,14 @@ input[type='radio'] {
 .aanmeldenStap1 label:nth-of-type(n+1) {
     display: inline;
     margin-right: 1em;
+}
+
+.nietIngelogd h2 {
+    margin-right: 1em;
+    margin-left: 0;
+    margin-bottom: 1em;
+}
+
+.boekToevoegenSluit {
+    text-decoration: underline;
 }

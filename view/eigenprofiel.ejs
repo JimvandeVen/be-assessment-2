@@ -21,6 +21,7 @@
     <main>
         <section class="inloggen hidden boekToevoegenSection">
             <h2>Voeg je boek toe</h2>
+            <p class="boekToevoegenSluit">sluiten</p>
             <form action="/boekToevoegen" method="post">
                 <label for="titel">Titel</label>
                 <input required name="titel" id="titel" placeholder="In Europa" class="formInput">
@@ -44,9 +45,9 @@
             <ul>
                
                <% data.forEach(function (entity) { %>
-                <li><%= entity.ISBN %></li>
+                <li><img src="/images/<%= entity.ISBN %>.jpg" alt="" ><div class="verwijderen">verwijderen</div></li>
                  <% }) %>
-                <li><img class="boekToevoegen" src="/images/add@2x.png" alt="" ></li>
+                <li><img class="boekToevoegen" src="/images/add.png" alt="" ></li>
             </ul>
         </section>
     </main>

@@ -4,12 +4,45 @@
 
 var boekToevoegenSection = document.querySelector(".boekToevoegenSection");
 var boekToevoegen = document.querySelector(".boekToevoegen");
-var boekToevoegenSluit= document.querySelector(".boekToevoegenSubmit");
+var boekToevoegenSluit= document.querySelector(".boekToevoegenSluit");
 
 function openToevoegen() {
     boekToevoegenSection.classList.remove("hidden");
 }
+function closeToevoegen() {
+    boekToevoegenSection.classList.add("hidden");
+}
 
 boekToevoegen.addEventListener("click", openToevoegen);
-boekToevoegenSubmit.addEventListener("click", closeToevoegen);
+boekToevoegenSluit.addEventListener("click", closeToevoegen);
+
+var remove = document.querySelectorAll('.verwijderen')
+console.log(remove)
+
+if (remove.length) {
+    remove.forEach(function(button) {
+        button.addEventListener('click', verwijder)
+    })
+}
+
+function verwijder(ev) {
+    var button = ev.target
+    var ISBN = button.dataset.ISBN
+
+    fetch('/' + ISBN, {method: 'delete'})
+        .then(onresponse)
+        .then(onload, onfail)
+
+    function onresponse(res) {
+        return res.json()
+    }
+
+    function onload() {
+        window.location = '/eigenprofiel'
+    }
+
+    function onfail() {
+        throw new Error('Could not delete!')
+    }
+}
 
