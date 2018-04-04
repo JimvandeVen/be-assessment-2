@@ -57,9 +57,20 @@ section {
     position: relative;
 }
 
+section a {
+    text-decoration: none;
+}
+
+.profielSectionIngelogd {
+    display: flex;
+}
+
 .kandidaad {
     float: left;
-    height: 6em;
+    max-height: 12em;
+    max-width: 6em;
+    overflow: hidden;
+    width: auto;
 }
 
 h2 {
@@ -83,10 +94,6 @@ section ul {
     flex-wrap: wrap;
 }
 
-.verwijderen {
-    width: 1em;
-    height: 1em;
-}
 
 section li {
     max-width: 4em;
@@ -97,7 +104,7 @@ section li {
 
 .boekToevoegen {
     align-self: center;
-   }
+}
 
 section ul img {
     width: auto;

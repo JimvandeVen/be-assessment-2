@@ -17,7 +17,6 @@ boekToevoegen.addEventListener("click", openToevoegen);
 boekToevoegenSluit.addEventListener("click", closeToevoegen);
 
 var remove = document.querySelectorAll('.verwijderen')
-console.log(remove)
 
 if (remove.length) {
     remove.forEach(function(button) {
@@ -27,7 +26,9 @@ if (remove.length) {
 
 function verwijder(ev) {
     var button = ev.target
-    var ISBN = button.dataset.ISBN
+    var ISBN = button.dataset.isbn
+    console.log(button)
+    console.log(ISBN)
 
     fetch('/' + ISBN, {method: 'delete'})
         .then(onresponse)

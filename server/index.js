@@ -9,6 +9,9 @@ var argon2 = require('argon2')
 var bodyParser = require('body-parser')
 var mysql = require('mysql')
 var session = require('express-session')
+var methodOverride = require('method-override')
+var multer = require('multer')
+
 
 
 
@@ -31,6 +34,8 @@ app.use(session({
     saveUninitialized: true,
     secret: process.env.SESSION_SECRET
 }))
+app.use('/image', express.static('static/upload'))
+app.use(methodOverride('_method'))
 
 app.listen(8000)
 
@@ -39,11 +44,12 @@ app.get('/aanmelden', aanmeldenForm)
 app.get('/profielstap2', profielStap2)
 app.get('/ingelogd', ingelogd)
 app.get('/eigenprofiel', eigenProfiel)
-app.get('/kandidaadprofiel', kandidaadProfiel)
 app.get('/berichten', berichten)
 app.get('/berichtendetail', berichten)
 app.get('/log-out', logout)
 app.get('/aanpassenForm', aanpassenForm)
+app.get('/:id', kandidaadProfiel)
+
 
 
 app.post('/profielPost', aanmelden)
@@ -87,6 +93,7 @@ function ingelogd(req, res) {
 
     if (req.session.user) {
         var email = req.session.user.email
+        var id = req.session.user.id
 
         connection.query('SELECT partnerGeslacht FROM gebruikers WHERE email = ?', email, done)
 
@@ -118,7 +125,6 @@ function ingelogd(req, res) {
 }
 
 function eigenProfiel(req, res) {
-
 
     if (req.session.user) {
         var email = req.session.user.email
@@ -171,12 +177,55 @@ function profielAanpassen(req, res) {
 }
 
 function kandidaadProfiel(req, res) {
-    var result = {
-        errors: [],
-        data: undefined
-    }
+    var id = req.params.id
+    var badRequest = isNaN(id)
+
     if (req.session.user) {
-        res.render('kandidaadprofiel.ejs', Object.assign({}, result))
+        connection.query('SELECT * FROM gebruikers LEFT JOIN gelezenBoekenTabel ON gebruikers.email = gelezenBoekenTabel.email WHERE id = ?', id, done)
+
+        function done(err, data) {
+            if (err) {
+                console.error(err)
+
+            } else if (badRequest) {
+                var result = {
+                    errors: [
+                        {
+                            id: 400,
+                            title: 'Bad Request',
+                            description: 'Bad Request',
+                            detail: 'detail'
+                }
+        ]
+                }
+                res.render('error.ejs', Object.assign({}, result))
+                return
+            } else if (data.length === 0) {
+                // 404 not found
+                var result = {
+                    errors: [
+                        {
+                            id: 404,
+                            title: 'Page Not Found',
+                            description: 'This animal does not exist',
+                            detail: 'detail'
+                }
+        ]
+                }
+                res.format({
+                    json: () => res.json(result),
+                    html: () => res.render('error.ejs', Object.assign({}, result))
+                })
+                return
+            } else {
+                console.log(data)
+                res.render('kandidaadprofiel.ejs', {
+                    data: data
+                })
+
+            }
+        }
+
     } else {
         res.status(401).render('nietIngelogd.ejs')
     }
@@ -252,15 +301,17 @@ function boekToevoegen(req, res) {
 
 function boekVerwijderen(req, res) {
     var ISBN = req.params.ISBN
-    connection.query('DELETE FROM gelezenBoekenTabel WHERE ISBN = ?', ISBN, done)
+    var email = req.session.user.email
+    console.log(ISBN)
+    console.log(email)
+
+    connection.query('DELETE FROM gelezenBoekenTabel WHERE email = ? AND ISBN = ?', [email, ISBN], done)
 
     function done(err) {
         if (err) {
             console.error(err)
         } else {
-            res.json({
-                staus: 'ok'
-            })
+            res.redirect('/eigenprofiel')
         }
     }
 }
@@ -332,7 +383,8 @@ function aanmelden(req, res, next) {
                 next(err)
             } else {
                 req.session.user = {
-                    email: email
+                    email: email,
+                    id: id
                 }
                 res.redirect('/ingelogd')
             }
@@ -377,7 +429,8 @@ function login(req, res, next) {
         function onverify(match) {
             if (match) {
                 req.session.user = {
-                    email: user.email
+                    email: user.email,
+                    id: user.id
                 };
                 res.redirect('/ingelogd')
             } else {

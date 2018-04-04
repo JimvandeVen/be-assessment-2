@@ -20,26 +20,29 @@
     </header>
     <main>
         <section class="profielSection">
-
-            <img class="kandidaad" src="/images/Profile%20Large.png" alt="geert mak">
+            <div class="kandidaad">
+            <img src="/image/<%= data[0].id %>.jpg" alt="geert mak"></div>
             <img class="chat" src="/images/chatLeeg.png" alt="chat">
-            <h2>Suzanne</h2>
+            <h2>
+                <%= data[0].naam %>
+            </h2>
 
-            <h3>Beschrijving:</h3>
-            <p>Ik ben een fervent lezer en houd vooral van historische romans.</p>
             <h4>Woonplaats:</h4>
-            <p>Amsterdam</p>
+            <p>
+                <%= data[0].woonplaats %>
+            </p>
             <h4>Geboortedatum:</h4>
-            <p>15-07-1990</p>
-            <h4>Suzanne's bibliotheek:</h4>
+            <p>
+                <%= data[0].geboortedatum %>
+            </p>
+            <h4>De bibliotheek van
+                <%= data[0].naam %>:</h4>
             <ul>
-                <li><img src="/images/de%20levens%20van%20jan%20six.jpg" alt=""></li>
-                <li><img src="/images/rijzen%20zonder%20john.jpg" alt=""></li>
-                <li><img src="/images/verleden%20van%20nederland.jpg" alt=""></li>
-                <li><img src="/images/de%20levens%20van%20jan%20six.jpg" alt=""></li>
-                <li><img src="/images/rijzen%20zonder%20john.jpg" alt=""></li>
 
-
+                <% if (data[0].ISBN){ data.forEach(function (entity) { %>
+                    <li>
+                        <img data-isbn="<%= entity.ISBN %>" src="/images/<%= entity.ISBN %>.jpg" alt=""></li>
+                    <% })} %>
             </ul>
 
         </section>

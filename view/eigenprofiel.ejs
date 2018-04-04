@@ -35,19 +35,28 @@
         <section class="eigenProfielSection">
 
             <img class="kandidaad" src="/images/Profile%20Large.png" alt="geert mak">
-            <h2><%= data[0].naam %></h2>
+            <h2>
+                <%= data[0].naam %>
+            </h2>
             <a href="/aanpassenForm"><img class="editButton" src="/images/edit@2x.png" alt="edit"></a>
             <h4>Woonplaats:</h4>
-            <p><%= data[0].woonplaats %></p>
+            <p>
+                <%= data[0].woonplaats %>
+            </p>
             <h4>Geboortedatum:</h4>
-            <p><%= data[0].geboortedatum %></p>
+            <p>
+                <%= data[0].geboortedatum %>
+            </p>
             <h4>Jouw bibliotheek:</h4>
             <ul>
-               
-               <% data.forEach(function (entity) { %>
-                <li><img src="/images/<%= entity.ISBN %>.jpg" alt="" ><div class="verwijderen">verwijderen</div></li>
-                 <% }) %>
-                <li><img class="boekToevoegen" src="/images/add.png" alt="" ></li>
+
+                <% if (data[0].ISBN){ data.forEach(function (entity) { %>
+                    <li>
+                        <form method="POST" action="/<%= entity.ISBN %>?_method=DELETE">
+                            <button type="submit">Delete</button>
+                        </form><img data-isbn="<%= entity.ISBN %>" src="/images/<%= entity.ISBN %>.jpg" alt="" ></li>
+                    <% })} %>
+                        <li><img class="boekToevoegen" src="/images/add.png" alt=""></li>
             </ul>
         </section>
     </main>
