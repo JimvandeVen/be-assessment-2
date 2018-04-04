@@ -20,9 +20,9 @@
         <section class="aanmelden">
             <h2 class="loginH2">Wordt lid en vindt jouw BookLove</h2>
             <p>Aan de hand van jouw voorkeur voor boeken vinden wij een match voor jou!</p>
-            
-                
-            <form action="/profielPost" method="post">
+
+
+            <form action="/profielPost" method="post" enctype="multipart/form-data">
 
                 <label for="emailInlog">e-mail adres:</label>
                 <input name="email" required id="emailInlog" type="email" placeholder="abc@email.com" class="formInput">
@@ -36,6 +36,8 @@
                 <input required name="woonplaats" type="text">
                 <label for="geboortedatum">geboortedatum:</label>
                 <input required name="geboortedatum" type="date">
+                <label>Profielfoto:</label>
+                <input type="file" name="image" accept="image/jpeg">
                 <p>Jij bent:</p>
                 <input name="gebruikerGeslacht" id="isVrouw" value="vrouw" type="radio">
                 <label for="isVrouw">Vrouw</label>
@@ -46,10 +48,10 @@
                 <label for="zoektVrouw">Vrouw</label>
                 <input name="partnerGeslacht" id="zoektMan" value="man" type="radio">
                 <label for="zoektMan">Man</label>
-                
-                
+
+
                 <input type="submit" value="aanmelden" class="formButton" id="inloggenSubmit">
-            
+
             </form>
 
 

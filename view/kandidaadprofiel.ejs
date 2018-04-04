@@ -15,13 +15,13 @@
         </a>
         <a href="/eigenprofiel"><img src="/images/Profile%20Large.png" alt="Profiel"></a>
         <a href="/berichten"><img class="berichten" src="/images/bericht.png" alt="Logo"></a>
-        <a href=/log-out>Log out</a>
+        <a class="logout" href=/log-out>Log out</a>
 
     </header>
     <main>
         <section class="profielSection">
             <div class="kandidaad">
-            <img src="/image/<%= data[0].id %>.jpg" alt="geert mak"></div>
+            <img src="/image/<%= data[0].id %>.jpg" alt="<%= data[0].naam %>"></div>
             <img class="chat" src="/images/chatLeeg.png" alt="chat">
             <h2>
                 <%= data[0].naam %>

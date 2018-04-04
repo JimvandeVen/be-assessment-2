@@ -33,6 +33,10 @@ header {
     margin-bottom: 1em;
 }
 
+.logout{
+    margin-top: .6em;
+}
+
 h1 {
     margin: 0;
     color: white;
@@ -57,8 +61,12 @@ section {
     position: relative;
 }
 
-section a {
+a {
     text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
 }
 
 .profielSectionIngelogd {
@@ -67,22 +75,27 @@ section a {
 
 .kandidaad {
     float: left;
-    max-height: 12em;
-    max-width: 6em;
+    height: 9em;
+    width: 6em;
     overflow: hidden;
-    width: auto;
+    margin: 0 1em 0 0;
+}
+
+.kandidaad img {
+    max-width: 100%;
+    height: auto;
+    align-self: center;
+    margin: 0;
 }
 
 h2 {
     display: inline-block;
     margin-bottom: 0;
-    margin-left: 1em;
 }
 
 h3 {
     display: inline-block;
     margin-top: 0;
-    margin-left: 1em;
 }
 
 section ul {
@@ -95,15 +108,31 @@ section ul {
 }
 
 
-section li {
-    max-width: 4em;
-    max-height: 6em;
+section ul li {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    max-width: 5em;
+    max-height: 10em;
     overflow: hidden;
     margin-bottom: 1em;
 }
 
-.boekToevoegen {
+section ul li img {
+    max-width: 100%;
+    height: auto;
     align-self: center;
+    margin: 0;
+}
+
+section ul li button {
+    margin-bottom: 0.5em;
+    margin-left: 0.4em;
+}
+
+.boekToevoegen {
+    align-self: stretch;
+    margin-top: 2em;
 }
 
 section ul img {
@@ -234,6 +263,10 @@ section ul img {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+.chat{
+    max-height: 3em;
 }
 
 .chatDetail {

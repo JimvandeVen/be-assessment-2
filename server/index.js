@@ -3,7 +3,6 @@
 require('dotenv').config()
 
 var express = require('express')
-//var fetch = require('node-fetch')
 var app = express()
 var argon2 = require('argon2')
 var bodyParser = require('body-parser')
@@ -11,9 +10,11 @@ var mysql = require('mysql')
 var session = require('express-session')
 var methodOverride = require('method-override')
 var multer = require('multer')
+var fs = require('fs')
 
-
-
+var upload = multer({
+    dest: 'static/upload/'
+})
 
 var connection = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -41,7 +42,6 @@ app.listen(8000)
 
 app.get('/', index)
 app.get('/aanmelden', aanmeldenForm)
-app.get('/profielstap2', profielStap2)
 app.get('/ingelogd', ingelogd)
 app.get('/eigenprofiel', eigenProfiel)
 app.get('/berichten', berichten)
@@ -51,8 +51,7 @@ app.get('/aanpassenForm', aanpassenForm)
 app.get('/:id', kandidaadProfiel)
 
 
-
-app.post('/profielPost', aanmelden)
+app.post('/profielPost', upload.single('image'), aanmelden)
 app.post('/log-in', login)
 app.post('/boekToevoegen', boekToevoegen)
 app.post('/aanpassen', profielAanpassen)
@@ -76,17 +75,6 @@ function aanmeldenForm(req, res) {
         data: undefined
     }
     res.render('aanmelden.ejs', Object.assign({}, result))
-}
-
-function profielStap2(req, res) {
-    var result = {
-        errors: [],
-        data: undefined
-    }
-    res.format({
-        json: () => res.json(result),
-        html: () => res.render('profielstap2.ejs', Object.assign({}, result))
-    })
 }
 
 function ingelogd(req, res) {
@@ -358,10 +346,12 @@ function aanmelden(req, res, next) {
     connection.query('SELECT * FROM gebruikers WHERE email = ?', email, done)
 
     function done(err, data) {
+        console.log(req.file)
         if (err) {
             next(err)
         } else if (data.length !== 0) {
             res.status(409).send('email already in use')
+
         } else {
             argon2.hash(password).then(onhash, next)
         }
@@ -378,13 +368,20 @@ function aanmelden(req, res, next) {
             geboortedatum: geboortedatum
         }, oninsert)
 
-        function oninsert(err) {
+        function oninsert(err, data) {
             if (err) {
                 next(err)
             } else {
+                if (req.file) {
+                    console.log("There was a file: ",req.file)
+                    fs.rename(req.file.path, 'static/upload/' + data.insertId + '.jpg', err => {
+                        if (err) {
+                            console.error(err)
+                        }
+                    })
+                }
                 req.session.user = {
                     email: email,
-                    id: id
                 }
                 res.redirect('/ingelogd')
             }

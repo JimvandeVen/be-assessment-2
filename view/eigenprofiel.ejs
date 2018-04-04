@@ -15,7 +15,7 @@
         </a>
         <a href="/eigenprofiel"><img src="/images/Profile%20Large.png" alt="Profiel"></a>
         <a href="/berichten"><img class="berichten" src="/images/bericht.png" alt="Logo"></a>
-        <a href=/log-out>Log out</a>
+        <a class="logout" href=/log-out>Log out</a>
 
     </header>
     <main>
@@ -34,7 +34,7 @@
         </section>
         <section class="eigenProfielSection">
 
-            <img class="kandidaad" src="/images/Profile%20Large.png" alt="geert mak">
+            <img class="kandidaad" src="/image/<%= data[0].id %>.jpg" alt="<%= data[0].naam %>">
             <h2>
                 <%= data[0].naam %>
             </h2>
@@ -53,10 +53,10 @@
                 <% if (data[0].ISBN){ data.forEach(function (entity) { %>
                     <li>
                         <form method="POST" action="/<%= entity.ISBN %>?_method=DELETE">
-                            <button type="submit">Delete</button>
+                            <button type="submit">Verwijder</button>
                         </form><img data-isbn="<%= entity.ISBN %>" src="/images/<%= entity.ISBN %>.jpg" alt="" ></li>
                     <% })} %>
-                        <li><img class="boekToevoegen" src="/images/add.png" alt=""></li>
+                        <li class="boekToevoegen"><img src="/images/add@2x.png" alt=""></li>
             </ul>
         </section>
     </main>
