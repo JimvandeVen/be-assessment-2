@@ -11,6 +11,7 @@ var session = require('express-session')
 var methodOverride = require('method-override')
 var multer = require('multer')
 var fs = require('fs')
+var matching = require('./matching')
 
 var upload = multer({
     dest: 'static/upload/'
@@ -77,36 +78,21 @@ function aanmeldenForm(req, res) {
     res.render('aanmelden.ejs', Object.assign({}, result))
 }
 
-function ingelogd(req, res) {
-
+async function ingelogd(req, res) {
     if (req.session.user) {
         var email = req.session.user.email
         var id = req.session.user.id
-
-        connection.query('SELECT partnerGeslacht FROM gebruikers WHERE email = ?', email, done)
-
-        function done(err, data) {
-            console.log(data)
-            if (err) {
-                console.error(err)
-            } else {
-                var gebruikerGeslacht = data[0].partnerGeslacht
-                console.log(data)
-                connection.query('SELECT * FROM gebruikers WHERE gebruikerGeslacht = ?', gebruikerGeslacht, done)
-
-                function done(err, data) {
-                    console.log(data)
-                    if (err) {
-                        console.error(err)
-                    } else {
-                        res.render('ingelogd.ejs', {
-                            data: data
-                        })
-                    }
-                }
-            }
+        try {
+            var partnerGeslacht = await matching.zoekPartnerGeslacht(email)
+            var gebruikersOpGeslacht = await matching.zoekGebruikersOpGeslacht(partnerGeslacht)
+            var gebruikersMetBoeken = await matching.koppelBoekenAanGebruikers(gebruikersOpGeslacht)
+            var eigenBoeken = await matching.zoekGelezenBoekenBijGebruiker(email)
+            var gematchdeGebruikers = await matching.matchGebruikers(eigenBoeken, gebruikersMetBoeken)
+            
+            res.render('ingelogd.ejs', {data: gematchdeGebruikers})
+        } catch (err) {
+            console.error(err)
         }
-
     } else {
         res.status(401).render('nietIngelogd.ejs')
     }
@@ -373,7 +359,7 @@ function aanmelden(req, res, next) {
                 next(err)
             } else {
                 if (req.file) {
-                    console.log("There was a file: ",req.file)
+                    console.log("There was a file: ", req.file)
                     fs.rename(req.file.path, 'static/upload/' + data.insertId + '.jpg', err => {
                         if (err) {
                             console.error(err)
@@ -445,4 +431,8 @@ function logout(req, res, next) {
             res.redirect('/')
         }
     })
+}
+
+module.exports = {
+    connection: connection
 }

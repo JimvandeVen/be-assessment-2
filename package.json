@@ -4,7 +4,8 @@
     "description": "Project tech",
     "main": "index.js",
     "scripts": {
-        "start": "node server"
+        "start": "node server",
+        "watch": "nodemon server"
     },
     "repository": {
         "type": "git",
