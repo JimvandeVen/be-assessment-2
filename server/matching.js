@@ -1,3 +1,5 @@
+// This was made together with Jonah Mijers 
+
 var mysql = require('mysql')
 
 var connection = mysql.createConnection({
