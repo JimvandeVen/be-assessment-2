@@ -1,4 +1,5 @@
 # BookLove
+![Screenshot of profile](/static/images/screenshot.png?)
 
 ## Installation
 
