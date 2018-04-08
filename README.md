@@ -96,7 +96,7 @@ view/error.ejs - ejs template for errors
 ## To do list  (If I had more time)
 
 - [ ] Get rid of all the client-side javascript that is not necessary, so progressive disclosure is fully used  
-- [ ] Create a real, working,  message besed system that works inside the application  
+- [ ] Create a real, working,  message based system that works inside the application  
 - [ ] Finnish the work started in CSS  
 - [ ] Deploy the website  
 - [ ] Show the user the books people have read in the 'ingelogd' page  
