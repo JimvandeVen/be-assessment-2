@@ -93,7 +93,7 @@ view/list.ejs - ejs template for all animals
 view/error.ejs - ejs template for errors
 ```  
 
-## To do list  
+## To do list  (If I had more time)
 
 - [ ] Get rid of all the client-side javascript that is necessary, so progressive disclosure is fully used  
 - [ ] Create a real, working,  message besed system that works inside the application  
