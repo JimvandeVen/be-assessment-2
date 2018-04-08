@@ -1,5 +1,25 @@
 # BookLove
-![Screenshot of profile](/static/images/screenshot.png?)
+![Screenshot of profile](/static/images/screenshot.png?)  
+
+## Introduction  
+BookLove is a dating website that matches people according to their read books. The more books you have in common, the better the match. As users you can:  
+* Create a profile  
+* Upload images  
+* Update your profile  
+* Add read books to your profile  
+* Look at matches and their profiles  
+* Send emails to get in touch  
+
+## Used technology  
+* [express](https://www.npmjs.com/package/express)  
+* [argon2](https://www.npmjs.com/package/argon2)  
+* [body-parser](https://www.npmjs.com/package/body-parser)  
+* [mysql](https://www.npmjs.com/package/mysql)  
+* [express-session](https://www.npmjs.com/package/express-session)  
+* [method-override](https://www.npmjs.com/package/method-override)  
+* [multer](https://www.npmjs.com/package/multer)  
+* [fs](https://www.npmjs.com/package/fs)  
+* [nodemon](https://www.npmjs.com/package/nodemon)  
 
 ## Installation
 
