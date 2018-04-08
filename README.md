@@ -91,7 +91,17 @@ static/ - output of `src` after processing (these are sent to the browser)
 view/detail.ejs - ejs template for one animal
 view/list.ejs - ejs template for all animals
 view/error.ejs - ejs template for errors
-```
+```  
+
+## To do list  
+
+- [] Get rid of all the client-side javascript that is necessary, so progressive disclosure is fully used  
+- [] Create a real, working,  message besed system that works inside the application  
+- [] Finnish the work started in CSS  
+- [] Deploy the website  
+- [] Show the user the books people have read in the 'ingelogd' page  
+- [] Connect a book API to the website  
+
 
 ## License
 
