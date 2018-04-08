@@ -26,7 +26,7 @@ BookLove is a dating website that matches people according to their read books. 
 
 ## Structure of the database  
 
-![Screenshot of profile](/static/images/screenshot.pdf?) 
+![MYSQL tables](/static/images/MySQLtabellen.png) 
 
 ## Installation  
 
