@@ -1,6 +1,6 @@
 # BookLove  
 
-![Screenshot of profile](/static/images/screenshot.png?)  
+![Screenshot of profile](/static/images/screenshot2.png?)  
 
 ## Introduction  
 
