@@ -1,7 +1,9 @@
-# BookLove
+# BookLove  
+
 ![Screenshot of profile](/static/images/screenshot.png?)  
 
 ## Introduction  
+
 BookLove is a dating website that matches people according to their read books. The more books you have in common, the better the match. As users you can:  
 * Create a profile  
 * Upload images  
@@ -11,6 +13,7 @@ BookLove is a dating website that matches people according to their read books. 
 * Send emails to get in touch  
 
 ## Used technology  
+
 * [express](https://www.npmjs.com/package/express)  
 * [argon2](https://www.npmjs.com/package/argon2)  
 * [body-parser](https://www.npmjs.com/package/body-parser)  
@@ -21,7 +24,11 @@ BookLove is a dating website that matches people according to their read books. 
 * [fs](https://www.npmjs.com/package/fs)  
 * [nodemon](https://www.npmjs.com/package/nodemon)  
 
-## Installation
+## Structure of the database  
+
+![Screenshot of profile](/static/images/screenshot.pdf?) 
+
+## Installation  
 
 1 Open terminal  
 2 cd to the map where you will save the project  
@@ -33,6 +40,7 @@ BookLove is a dating website that matches people according to their read books. 
 6 have fun :)    
 
 ## Getting the database working  
+
 In the root of my repo is a file called ```booklovedb.sql```.  
 This file can be used to upload an existing database.   
 To do so, create a mysql database and connect with it.  
@@ -42,6 +50,7 @@ It will ask your username and password, after you entered it correctly you will 
 
 
 ## Connect with the server  
+
 To connect with the server you have to use your own mysql information in the index.js (By choice i would recommend using [dotenv](https://www.npmjs.com/package/dotenv) for this).  
 
 The code that has to be changed:
@@ -55,7 +64,7 @@ var connection = mysql.createConnection({
 })
 ```
 
-## Brief description of code
+## Brief description of code  
 
 ```txt
 server/ - web server  
