@@ -1,4 +1,5 @@
 # BookLove
+![Screenshot of profile](/static/images/screenshot.png?)
 
 ## Installation
 
@@ -35,3 +36,37 @@ var connection = mysql.createConnection({
 ```
 
 ## Brief description of code
+
+```txt
+server/ - web server  
+server/index.js - express server  
+server/matching.js - matching system  
+static/ - static files used in the website  
+static/images - static images created for the website  
+static/upload - static images uploaded by the users  
+static/java.js - cient-side javascript that handles the login and register  
+static/javaprofielstap2.js - client-side javascript that handles the adding of books  
+static/main.css - unprocessed styles  
+view/ - different used templates  
+view/aanmelden.ejs - ejs template for registering  
+view/aanpassen.ejs - ejs template for updating profile  
+view/berichten.ejs - ejs template for messages (static)  
+view/berichtendetail.ejs - ejs template for messages (static)  
+view/eigenprofiel.ejs - ejs template for current user profile  
+view/error.ejs - ejs template for errors  
+view/index.ejs - ejs template for onboarding  
+view/ingelogd.ejs - ejs template for logged in users  
+view/kandidaadprofiel.ejs - ejs template for other users  
+view/nietIngelogd.ejs - ejs template for not logged in users  
+static/ - output of `src` after processing (these are sent to the browser)
+view/detail.ejs - ejs template for one animal
+view/list.ejs - ejs template for all animals
+view/error.ejs - ejs template for errors
+```
+
+## License
+
+[MIT][] © [Jim van de Ven][author]
+
+[mit]: license
+
