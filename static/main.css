@@ -71,6 +71,7 @@ a:visited {
 
 .profielSectionIngelogd {
     display: flex;
+    justify-content: space-between;
 }
 
 .kandidaad {

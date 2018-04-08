@@ -21,12 +21,13 @@
             <section class="profielSectionIngelogd">
 
                 <a href="/<%= entity.id %>"><div class="kandidaad"><img class="kandidaad" src="/image/<%= entity.id %>.jpg" alt="<%= entity.naam %>"></div>
-                <img class="chat" src="/images/chatLeeg.png" alt="chat">
+               
                 <h2>
                     <%= entity.naam %>
                 </h2>
-                <h3>match 95%</h3>
+                <h3> <%= entity.boek %></h3>
                 </a>
+                <a href="mailto:<%= entity.email %>"><img class="chat" src="/images/chatLeeg.png" alt="chat"></a>
             </section>
             <% }) %>
     </main>

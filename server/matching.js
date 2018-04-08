@@ -81,7 +81,7 @@ function matchGebruikers(eigenBoeken, gebruikers) {
         const matchArray = gebruikers
             .filter(gebruiker => gebruiker.gematchedeBoeken.length)
             .sort((a, b) => a.gematchedeBoeken.length - b.gematchedeBoeken.length);
-        
+        console.log(matchArray)
         resolve(matchArray)
     })
 }

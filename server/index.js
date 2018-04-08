@@ -216,9 +216,10 @@ async function ingelogd(req, res) { // This function is the most complicated par
             var gebruikersMetBoeken = await matching.koppelBoekenAanGebruikers(gebruikersOpGeslacht) // Selects all the books read by the previously selected users, and stores them with the proper users.
             var eigenBoeken = await matching.zoekGelezenBoekenBijGebruiker(email) // Selects the current users read books.
             var gematchdeGebruikers = await matching.matchGebruikers(eigenBoeken, gebruikersMetBoeken) // For each read boek of the current user, the server checks if another user has also read it. Then with a filter and a sort function the server resolves the promise with an array of users to be shown in the feed of the current user. 
-
+            console.dir(gebruikersMetBoeken)
             res.render('ingelogd.ejs', {
-                data: gematchdeGebruikers
+                data: gematchdeGebruikers, 
+                gelezenboeken: gebruikersMetBoeken
             })
         } catch (err) {
             console.error(err)
